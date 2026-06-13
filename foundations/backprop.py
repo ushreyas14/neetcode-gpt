@@ -17,7 +17,7 @@ class Solution:
         z = np.dot(x, w) + b
         y_hat = 1/(1+np.exp(-z))
         
-        dw = np.dot((y_hat-y_true),(y_hat*(1-y_hat)*x))
+        dw = (y_hat-y_true)*(y_hat*(1-y_hat)*x)
         db = (y_hat-y_true)*y_hat*(1-y_hat)
 
         return (np.round(dw, 5), np.round(db, 5))
