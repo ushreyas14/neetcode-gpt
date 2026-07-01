@@ -13,12 +13,10 @@ class Solution:
         pe = np.zeros((seq_len, d_model))
         position = np.arange(seq_len).reshape(-1, 1)
 
-        div_term_even = 10000 ** (np.arange(0, d_model, 2)/ d_model)
-        div_term_odd = 10000 ** ((np.arange(1, d_model, 2)-1)/ d_model)
+        div_term = 10000 ** (np.arange(0, d_model, 2)/ d_model)
 
-
-        pe[:, 0::2] = np.sin(position/div_term_even)
-        pe[:, 1::2] = np.cos(position/div_term_odd)
+        pe[:, 0::2] = np.sin(position/div_term)
+        pe[:, 1::2] = np.cos(position/div_term[:pe[:, 1::2].shape[1]])
 
         return np.round(pe, 5)
 
